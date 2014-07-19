@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <QLineEdit>
 #include <iostream>
 #include <string>
 
@@ -18,10 +19,14 @@ public:
     ~MainWindow();
 
 private slots:
-    void handleSubmit();
+
+    void on_submitButton_clicked();
 
 private:
     Ui::MainWindow *ui;
+
+    QLineEdit *stopTimeText;
+    QLineEdit *startTimeText;
 };
 
 #endif // MAINWINDOW_H

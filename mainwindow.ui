@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>216</width>
-    <height>434</height>
+    <height>398</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -138,7 +138,7 @@
    <widget class="QPushButton" name="submitButton">
     <property name="geometry">
      <rect>
-      <x>30</x>
+      <x>60</x>
       <y>260</y>
       <width>93</width>
       <height>28</height>
@@ -148,30 +148,30 @@
      <string>Submit</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="statsButton">
+   <widget class="QLabel" name="label">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>300</y>
-      <width>121</width>
-      <height>28</height>
+      <x>40</x>
+      <y>310</y>
+      <width>101</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Show Statistics</string>
+     <string>Billable percentage:</string>
     </property>
    </widget>
-   <widget class="QPushButton" name="doneButton">
+   <widget class="QLabel" name="billablePercentage">
     <property name="geometry">
      <rect>
-      <x>30</x>
-      <y>340</y>
-      <width>111</width>
-      <height>28</height>
+      <x>140</x>
+      <y>310</y>
+      <width>31</width>
+      <height>16</height>
      </rect>
     </property>
     <property name="text">
-     <string>Done</string>
+     <string>TextLabel</string>
     </property>
    </widget>
   </widget>
@@ -181,17 +181,9 @@
      <x>0</x>
      <y>0</y>
      <width>216</width>
-     <height>26</height>
+     <height>21</height>
     </rect>
    </property>
-  </widget>
-  <widget class="QToolBar" name="mainToolBar">
-   <attribute name="toolBarArea">
-    <enum>TopToolBarArea</enum>
-   </attribute>
-   <attribute name="toolBarBreak">
-    <bool>false</bool>
-   </attribute>
   </widget>
   <widget class="QStatusBar" name="statusBar"/>
  </widget>
