@@ -16,7 +16,7 @@ MainWindow::MainWindow(QWidget *parent) :
     submitButton = ui->submitButton;
     adminCheck = ui->adminCheck;
 
-    memberTextEdit->setMaxLength(2);
+    memberTextEdit->setMaxLength(5);
 
     QDate *temp = new QDate();
 
@@ -69,7 +69,8 @@ bool MainWindow::canSubmit()
         return false;
     }
 
-    if(!adminCheck->isChecked() && (memberTextEdit->text() == "" || memberTextEdit->text() == " " || memberTextEdit->text() == "  "))
+    if(!adminCheck->isChecked() && (memberTextEdit->text() == "" || memberTextEdit->text() == " " || memberTextEdit->text() == "  ") ||
+           memberTextEdit->text() == "   " || memberTextEdit->text() == "    ")
     {
 
         return false;
