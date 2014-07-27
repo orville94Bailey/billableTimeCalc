@@ -13,18 +13,22 @@ MainWindow::MainWindow(QWidget *parent) :
     billablePercentage = ui->billablePercentage;
     serviceEdit = ui->serviceEdit;
     memberTextEdit = ui->memberTextEdit;
+    submitButton = ui->submitButton;
+    adminCheck = ui->adminCheck;
+
+    memberTextEdit->setMaxLength(2);
 
     QDate *temp = new QDate();
 
     dir = new QDir(QDir().homePath());
-    qDebug() << QDir().homePath();
     dir->setPath(QDir().homePath()+"/documents/BillableTimeCalculator");
     dir->mkdir(dir->path());
 
     dateEdit->setDate(temp->currentDate());
 
-    std::setprecision(3);
-    billablePercentage->setText("");
+    billablePercentage->setText("0%");
+
+    submitButton->setDisabled(true);
 }
 
 MainWindow::~MainWindow()
@@ -36,8 +40,42 @@ MainWindow::~MainWindow()
     delete billablePercentage;
     delete serviceEdit;
     delete memberTextEdit;
+    delete submitButton;
+    delete adminCheck;
 }
 
+QString MainWindow::toString(int num)
+{
+    QString str = "";
+
+    while(num > 0)
+    {
+
+        int digit = num % 10;
+        num = num / 10;
+        QString temp = " ";
+        temp[0] = static_cast<char>(digit+48);
+        str = temp + str;
+    }
+
+    return str;
+}
+
+bool MainWindow::canSubmit()
+{
+    if(startTimeEdit->time() == stopTimeEdit->time())
+    {
+
+        return false;
+    }
+
+    if(!adminCheck->isChecked() && (memberTextEdit->text() == "" || memberTextEdit->text() == " " || memberTextEdit->text() == "  "))
+    {
+
+        return false;
+    }
+    return true;
+}
 
 void MainWindow::on_submitButton_clicked()
 {
@@ -50,7 +88,7 @@ void MainWindow::on_submitButton_clicked()
     QDate enteredDate = dateEdit->date();
 
     //Generate the current date's folder
-    QString folderName = toString(enteredDate.month())+"_"+toString(enteredDate.day())+"_"+toString(enteredDate.year());
+    folderName = toString(enteredDate.month())+"_"+toString(enteredDate.day())+"_"+toString(enteredDate.year());
 
     dir->mkdir(dir->path()+"/"+folderName);
 
@@ -60,6 +98,7 @@ void MainWindow::on_submitButton_clicked()
     QTextStream out(&outFile);
 
     QString serviceText = serviceEdit->toPlainText();
+    QString memberText = memberTextEdit->text();
 
     QStringList serviceWords = serviceText.split(" ");
 
@@ -70,16 +109,37 @@ void MainWindow::on_submitButton_clicked()
     int currentPiece = 0;
 
 
-    if(memberTextEdit->text().toUpper()!="ADMIN")
+    if(!adminCheck->isChecked())
     {
+
         totalBillableTime+=startTime.secsTo(stopTime);
     }
+    else
+    {
+
+        memberText = "ADMIN";
+    }
+
+    memberText = memberText.toUpper();
 
     totalTime+=startTime.secsTo(stopTime);
 
     billableTimePercentage = totalBillableTime/totalTime*100;
 
-    billablePercentage->setText(toString(billableTimePercentage) + "%");
+    QString billableDisplayString = "";
+
+    if(billableTimePercentage < 100)
+    {
+
+        billableDisplayString = toString(billableTimePercentage) + "." + toString(static_cast<int>(billableTimePercentage*10)/100) + "%";
+    }
+    else
+    {
+
+        billableDisplayString = "100%";
+    }
+
+    billablePercentage->setText(billableDisplayString);
 
     //Split the service text into lines of ~80 characters, preserving whole words
     while(i < serviceWords.size())
@@ -103,8 +163,8 @@ void MainWindow::on_submitButton_clicked()
     }
 
     out << "--------------------\n"
-        << "Start: " << startTime.toString("h:m") << "\n"
-        << "Stop: " << stopTime.toString("h:m") << "\n"
+        << "Start: " << startTime.toString("h:mm") << "\n"
+        << "Stop: " << stopTime.toString("h:mm") << "\n"
         << "Service: \n";
 
     i = 0;
@@ -114,8 +174,10 @@ void MainWindow::on_submitButton_clicked()
         i++;
     }
 
-    out << "Member: " << memberTextEdit->text() << "\n";
+    out << "Member: " << memberText << "\n";
     out << "--------------------\n";
+
+    out << "Billable Percentage: " << billablePercentage->text();
 
     outFile.close();
 
@@ -124,19 +186,60 @@ void MainWindow::on_submitButton_clicked()
     serviceEdit->clear();
 }
 
-QString MainWindow::toString(int num)
+void MainWindow::on_startTimeEdit_timeChanged(const QTime &time)
 {
-    QString str = "";
-
-    while(num > 0)
+    stopTimeEdit->setMinimumTime(startTimeEdit->time());
+    if(canSubmit())
     {
 
-        int digit = num % 10;
-        num = num / 10;
-        QString temp = " ";
-        temp[0] = static_cast<char>(digit+48);
-        str = temp + str;
+        submitButton->setDisabled(false);
     }
+    else
+    {
 
-    return str;
+        submitButton->setDisabled(true);
+    }
+}
+
+void MainWindow::on_adminCheck_toggled(bool checked)
+{
+    memberTextEdit->setText("");
+    if(canSubmit())
+    {
+
+        submitButton->setDisabled(false);
+    }
+    else
+    {
+
+        submitButton->setDisabled(true);
+    }
+}
+
+void MainWindow::on_stopTimeEdit_timeChanged(const QTime &time)
+{
+    if(canSubmit())
+    {
+
+        submitButton->setDisabled(false);
+    }
+    else
+    {
+
+        submitButton->setDisabled(true);
+    }
+}
+
+void MainWindow::on_memberTextEdit_textChanged(const QString &arg1)
+{
+    if(canSubmit())
+    {
+
+        submitButton->setDisabled(false);
+    }
+    else
+    {
+
+        submitButton->setDisabled(true);
+    }
 }

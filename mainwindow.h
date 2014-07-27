@@ -12,6 +12,8 @@
 #include <QFile>
 #include <QTextStream>
 #include <QStringList>
+#include <QPushButton>
+#include <QCheckBox>
 #include <string>
 #include <cstring>
 #include <vector>
@@ -33,6 +35,14 @@ private slots:
 
     void on_submitButton_clicked();
 
+    void on_startTimeEdit_timeChanged(const QTime &time);
+
+    void on_adminCheck_toggled(bool checked);
+
+    void on_stopTimeEdit_timeChanged(const QTime &time);
+
+    void on_memberTextEdit_textChanged(const QString &arg1);
+
 private:
     Ui::MainWindow *ui;
 
@@ -43,14 +53,19 @@ private:
     QTextEdit *serviceEdit;
     QLineEdit *memberTextEdit;
     QLabel *billablePercentage;
+    QPushButton *submitButton;
+    QCheckBox *adminCheck;
 
     QDir *dir;
 
     QString toString(int);
+    bool canSubmit();
 
-    float totalTime=0;
-    float totalBillableTime=0;
-    float billableTimePercentage=0;
+    float totalTime;
+    float totalBillableTime;
+    float billableTimePercentage;
+
+    QString folderName;
 };
 
 #endif // MAINWINDOW_H
