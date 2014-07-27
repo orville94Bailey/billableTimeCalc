@@ -49,49 +49,59 @@ void MainWindow::on_submitButton_clicked()
     //Generate the current date's folder
     QString folderName = toString(enteredDate.month())+"_"+toString(enteredDate.day())+"_"+toString(enteredDate.year());
 
-    dir->setPath(dir->path()+"/"+folderName);
-    dir->mkdir(dir->path());
-    qDebug() << dir->path();
+    dir->mkdir(dir->path()+"/"+folderName);
 
-    QFile outFile(dir->path()+"/log.txt");
-    outFile.open(QIODevice::WriteOnly | QIODevice::Append);
+    //Open the log file for data recording
+    QFile outFile(dir->path()+"/"+folderName+"/log.txt");
+    outFile.open(QIODevice::WriteOnly | QIODevice::Append | QIODevice::Text);
     QTextStream out(&outFile);
 
     QString serviceText = serviceEdit->toPlainText();
 
-    int i = 0;
+    QStringList serviceWords = serviceText.split(" ");
+
     std::vector<QString> pieces;
     pieces.push_back("");
-    while(i < serviceText.length())
+
+    int i = 0;
+    int currentPiece = 0;
+
+    //Split the service text into lines of ~80 characters, preserving whole words
+    while(i < serviceWords.size())
     {
-        pieces.at(i/80).push_back(serviceText.at(i));
-        i++;
-        if(i % 80 == 0)
+        if(pieces.at(currentPiece).length()+serviceWords.at(i).length() <= 80)
         {
 
+            pieces.at(currentPiece) = pieces.at(currentPiece) + serviceWords.at(i) + " ";
+        }
+        else
+        {
+            if(pieces.at(currentPiece) == "")
+            {
+
+                pieces.at(currentPiece) = serviceWords.at(i);
+            }
+            currentPiece++;
             pieces.push_back("");
         }
+        i++;
     }
 
-    /*out << "--------------------\n\n";
-    out << "Start: ";
-    out << toString(startTime.hour());
-    out << ":";
-    out << toString(startTime.minute()) << "\n"
-        << "Stop: " << toString(stopTime.hour()) << ":" << toString(stopTime.minute()) << "\n";
-
-    out << "Service: \n";*/
+    out << "--------------------\n"
+        << "Start: " << startTime.toString("h:m") << "\n"
+        << "Stop: " << stopTime.toString("h:m") << "\n"
+        << "Service: \n";
 
     i = 0;
     while(i < pieces.size())
     {
-        /*out << pieces.at(i) << "\n";*/
+        out << pieces.at(i) << "\n";
         i++;
     }
 
-    /*out << "Member: " << memberTextEdit->text();
-    out << "--------------------";
-    out.flush();*/
+    out << "Member: " << memberTextEdit->text() << "\n";
+    out << "--------------------\n";
+
     outFile.close();
 
     //Clear displays

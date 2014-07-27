@@ -11,6 +11,7 @@
 #include <QDir>
 #include <QFile>
 #include <QTextStream>
+#include <QStringList>
 #include <string>
 #include <cstring>
 #include <vector>
