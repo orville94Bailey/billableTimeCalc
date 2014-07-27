@@ -69,7 +69,7 @@ void MainWindow::on_submitButton_clicked()
     int i = 0;
     int currentPiece = 0;
 
-
+    //calculates the billable percentage
     if(memberTextEdit->text().toUpper()!="ADMIN")
     {
         totalBillableTime+=startTime.secsTo(stopTime);
