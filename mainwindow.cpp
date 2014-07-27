@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent) :
     dir->mkdir(dir->path());
 
     dateEdit->setDate(temp->currentDate());
+
+    std::setprecision(3);
+    billablePercentage->setText("");
 }
 
 MainWindow::~MainWindow()
@@ -65,6 +68,18 @@ void MainWindow::on_submitButton_clicked()
 
     int i = 0;
     int currentPiece = 0;
+
+
+    if(memberTextEdit->text().toUpper()!="ADMIN")
+    {
+        totalBillableTime+=startTime.secsTo(stopTime);
+    }
+
+    totalTime+=startTime.secsTo(stopTime);
+
+    billableTimePercentage = totalBillableTime/totalTime*100;
+
+    billablePercentage->setText(toString(billableTimePercentage) + "%");
 
     //Split the service text into lines of ~80 characters, preserving whole words
     while(i < serviceWords.size())

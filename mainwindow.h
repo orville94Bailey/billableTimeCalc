@@ -15,6 +15,7 @@
 #include <string>
 #include <cstring>
 #include <vector>
+#include <iomanip>
 
 namespace Ui {
 class MainWindow;
@@ -46,6 +47,10 @@ private:
     QDir *dir;
 
     QString toString(int);
+
+    float totalTime=0;
+    float totalBillableTime=0;
+    float billableTimePercentage=0;
 };
 
 #endif // MAINWINDOW_H
