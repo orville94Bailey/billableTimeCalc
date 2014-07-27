@@ -14,16 +14,6 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralWidget">
-   <widget class="QLineEdit" name="dateLineEdit">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>10</y>
-      <width>113</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QLabel" name="dateLabel">
     <property name="geometry">
      <rect>
@@ -89,7 +79,7 @@
      <string>Service:</string>
     </property>
    </widget>
-   <widget class="QTextEdit" name="textEdit">
+   <widget class="QTextEdit" name="serviceEdit">
     <property name="geometry">
      <rect>
       <x>60</x>
@@ -105,27 +95,7 @@
      </sizepolicy>
     </property>
    </widget>
-   <widget class="QLineEdit" name="startTimeText">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>40</y>
-      <width>113</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="stopTimeText">
-    <property name="geometry">
-     <rect>
-      <x>70</x>
-      <y>70</y>
-      <width>113</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QLineEdit" name="memberText">
+   <widget class="QLineEdit" name="memberTextEdit">
     <property name="geometry">
      <rect>
       <x>70</x>
@@ -172,6 +142,36 @@
     </property>
     <property name="text">
      <string>TextLabel</string>
+    </property>
+   </widget>
+   <widget class="QDateEdit" name="dateEdit">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>10</y>
+      <width>111</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTimeEdit" name="startTimeEdit">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>40</y>
+      <width>111</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QTimeEdit" name="stopTimeEdit">
+    <property name="geometry">
+     <rect>
+      <x>70</x>
+      <y>70</y>
+      <width>111</width>
+      <height>22</height>
+     </rect>
     </property>
    </widget>
   </widget>

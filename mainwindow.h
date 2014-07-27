@@ -2,9 +2,18 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
-#include <QLineEdit>
-#include <iostream>
+#include <QTextEdit>
+#include <QTimeEdit>
+#include <QDateEdit>
+#include <QtDebug>
+#include <QLabel>
+#include <QTime>
+#include <QDir>
+#include <QFile>
+#include <QTextStream>
 #include <string>
+#include <cstring>
+#include <vector>
 
 namespace Ui {
 class MainWindow;
@@ -25,8 +34,17 @@ private slots:
 private:
     Ui::MainWindow *ui;
 
-    QLineEdit *stopTimeText;
-    QLineEdit *startTimeText;
+    //pointers for UI elements
+    QTimeEdit *stopTimeEdit;
+    QTimeEdit *startTimeEdit;
+    QDateEdit *dateEdit;
+    QTextEdit *serviceEdit;
+    QLineEdit *memberTextEdit;
+    QLabel *billablePercentage;
+
+    QDir *dir;
+
+    QString toString(int);
 };
 
 #endif // MAINWINDOW_H
