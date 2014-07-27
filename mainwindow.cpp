@@ -108,7 +108,6 @@ void MainWindow::on_submitButton_clicked()
     int i = 0;
     int currentPiece = 0;
 
-
     if(!adminCheck->isChecked())
     {
 
