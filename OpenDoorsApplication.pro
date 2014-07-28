@@ -8,6 +8,8 @@ QT       += core gui
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
+INCLUDEPATH += $$PWD
+
 TARGET = OpenDoorsApplication
 TEMPLATE = app
 

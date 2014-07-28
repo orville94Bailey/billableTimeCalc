@@ -29,6 +29,31 @@ MainWindow::MainWindow(QWidget *parent) :
     billablePercentage->setText("0%");
 
     submitButton->setDisabled(true);
+
+    if(dir->exists(QDir().homePath()+"/documents/BillableTimeCalculator/MemberTimes.txt"))
+    {
+
+        QFile memberLog("MemberTimes.txt");
+        memberLog.open(QIODevice::ReadOnly | QIODevice::Text);
+        QTextStream in(&memberLog);
+
+        std::vector<QString> lines;
+        while(!in.atEnd())
+        {
+
+            lines.push_back(in.readLine());
+        }
+
+        QStringList temp;
+        int i = 0;
+        while(i<lines.size())
+        {
+
+            temp = lines.at(i).split(" ");
+            memberNames.push_back(temp.at(0));
+            //memberTimes.push_back(toSecs(temp.at(1)));
+        }
+    }
 }
 
 MainWindow::~MainWindow()

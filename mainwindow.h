@@ -63,6 +63,9 @@ private:
     int strTimetoSec(QString);
     bool canSubmit();
 
+    std::vector<QString> memberNames;
+    std::vector<int> memberTimes;
+
     float totalTime;
     float totalBillableTime;
     float billableTimePercentage;
