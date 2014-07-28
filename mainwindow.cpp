@@ -200,7 +200,7 @@ void MainWindow::on_submitButton_clicked()
     }
 
     out << "Member: " << memberText << "\n";
-    out << "Billable Percentage: " << billablePercentage->text();
+    out << "Billable Percentage: " << billablePercentage->text() << "\n";
     out << "--------------------\n";
 
     outFile.close();
