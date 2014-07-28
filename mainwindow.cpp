@@ -94,8 +94,8 @@ bool MainWindow::canSubmit()
         return false;
     }
 
-    if(!adminCheck->isChecked() && (memberTextEdit->text() == "" || memberTextEdit->text() == " " || memberTextEdit->text() == "  ") ||
-           memberTextEdit->text() == "   " || memberTextEdit->text() == "    ")
+    if(!adminCheck->isChecked() && (memberTextEdit->text() == "" || memberTextEdit->text() == " " || memberTextEdit->text() == "  "
+                                    || memberTextEdit->text() == "   " || memberTextEdit->text() == "    " || memberTextEdit->text() == "     "))
     {
 
         return false;
