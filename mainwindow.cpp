@@ -242,3 +242,129 @@ void MainWindow::on_memberTextEdit_textChanged(const QString &arg1)
         submitButton->setDisabled(true);
     }
 }
+
+int MainWindow::strTimetoSec(QString strTime)
+{
+    QString hourHolder=0;
+    QString minuteHolder=0;
+    QString tensHourHolder="";
+    QString onesHourHolder="";
+    QString tensMinHolder="";
+    QString onesMinHolder="";
+
+    hourHolder = strTime.split(":")[0];
+    minuteHolder = strTime.split(":")[1];
+
+    tensHourHolder = hourHolder.left(1);
+    onesHourHolder = hourHolder.right(1);
+
+    tensMinHolder = minuteHolder.left(1);
+    onesMinHolder = minuteHolder.right(1);
+
+    int inthours=0;
+    int intminutes=0;
+    int totalSeconds=0;
+
+    switch(tensHourHolder.toStdString()[0])
+    {
+    case '1':
+        inthours += 10;
+        break;
+    case '2':
+        inthours += 20;
+        break;
+    }
+
+    switch (onesHourHolder.toStdString()[0])
+    {
+    case '0':
+        break;
+    case '1':
+        inthours +=1;
+        break;
+    case '2':
+        inthours +=2;
+        break;
+    case '3':
+        inthours +=3;
+        break;
+    case '4':
+        inthours +=4;
+        break;
+    case '5':
+        inthours +=5;
+        break;
+    case '6':
+        inthours +=6;
+        break;
+    case '7':
+        inthours +=7;
+        break;
+    case '8':
+        inthours +=8;
+        break;
+    case '9':
+        inthours +=9;
+        break;
+    }
+
+    switch (tensMinHolder.toStdString()[0])
+    {
+    case '0':
+        break;
+    case '1':
+        intminutes +=10;
+        break;
+    case '2':
+        intminutes +=20;
+        break;
+    case '3':
+        intminutes +=30;
+        break;
+    case '4':
+        intminutes +=40;
+        break;
+    case '5':
+        intminutes +=50;
+        break;
+    case '6':
+        intminutes +=60;
+        break;
+    }
+
+    switch (onesMinHolder.toStdString()[0])
+    {
+    case '0':
+        break;
+    case '1':
+        intminutes +=1;
+        break;
+    case '2':
+        intminutes +=2;
+        break;
+    case '3':
+        intminutes +=3;
+        break;
+    case '4':
+        intminutes +=4;
+        break;
+    case '5':
+        intminutes +=5;
+        break;
+    case '6':
+        intminutes +=6;
+        break;
+    case '7':
+        intminutes +=7;
+        break;
+    case '8':
+        intminutes +=8;
+        break;
+    case '9':
+        intminutes +=9;
+        break;
+    }
+
+    totalSeconds += intminutes*60;
+    totalSeconds += inthours*3600;
+}

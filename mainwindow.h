@@ -43,6 +43,7 @@ private slots:
 
     void on_memberTextEdit_textChanged(const QString &arg1);
 
+
 private:
     Ui::MainWindow *ui;
 
@@ -59,6 +60,7 @@ private:
     QDir *dir;
 
     QString toString(int);
+    int strTimetoSec(QString);
     bool canSubmit();
 
     float totalTime;
