@@ -44,6 +44,8 @@ private slots:
     void on_memberTextEdit_textChanged(const QString &arg1);
 
 
+    void on_dateEdit_dateChanged(const QDate &date);
+
 private:
     Ui::MainWindow *ui;
 
@@ -60,7 +62,10 @@ private:
     QDir *dir;
 
     QString toString(int);
+    QString toString(float,int);
+    int toInt(QString);
     int strTimetoSec(QString);
+    QString secsToStringTime(int);
     bool canSubmit();
 
     std::vector<QString> memberNames;
