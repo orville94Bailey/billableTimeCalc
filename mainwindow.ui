@@ -205,6 +205,15 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
+ <tabstops>
+  <tabstop>dateEdit</tabstop>
+  <tabstop>startTimeEdit</tabstop>
+  <tabstop>stopTimeEdit</tabstop>
+  <tabstop>memberTextEdit</tabstop>
+  <tabstop>serviceEdit</tabstop>
+  <tabstop>adminCheck</tabstop>
+  <tabstop>submitButton</tabstop>
+ </tabstops>
  <resources/>
  <connections/>
 </ui>
