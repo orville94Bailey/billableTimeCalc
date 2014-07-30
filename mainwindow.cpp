@@ -463,3 +463,80 @@ void MainWindow::on_dateEdit_dateChanged(const QDate &date)
 
     folderName = toString(date.month())+"_"+toString(date.day())+"_"+toString(date.year());
 }
+
+////////////////////
+//LogEntry methods//
+////////////////////
+
+LogEntry::LogEntry() : memberName(""), startTime(""),stopTime(""),notes(""),startTimeSecs(0),stopTimeSecs(0),elapsedTimeSecs(0)
+{
+
+}
+
+LogEntry::~LogEntry()
+{
+
+
+}
+
+QString LogEntry::getMemberName()
+{
+
+    return memberName;
+}
+
+void LogEntry::setMemberName(QString newName)
+{
+
+    memberName = newName;
+}
+
+QString LogEntry::getStartTime()
+{
+
+    return startTime;
+}
+
+void LogEntry::setStartTime(QString newTime)
+{
+
+    startTime = newTime;
+}
+
+QString LogEntry::getStopTime()
+{
+
+    return stopTime;
+}
+
+void LogEntry::setStopTime(QString newTime)
+{
+
+    stopTime = newTime;
+}
+
+int LogEntry::getStartTimeSecs()
+{
+
+    return startTimeSecs;
+}
+
+void LogEntry::setStartTimeSecs(int newTime)
+{
+
+    startTimeSecs = newTime;
+    elapsedTimeSecs = stopTimeSecs - startTimeSecs;
+}
+
+int LogEntry::getStopTimeSecs()
+{
+
+    return stopTimeSecs;
+}
+
+void LogEntry::setStopTimeSecs(int newTime)
+{
+
+    stopTimeSecs = newTime;
+    elapsedTimeSecs = stopTimeSecs - startTimeSecs;
+}

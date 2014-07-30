@@ -78,4 +78,43 @@ private:
     QString folderName;
 };
 
+class LogEntry
+{
+
+public:
+
+    LogEntry();
+    ~LogEntry();
+
+    QString getMemberName();
+    void setMemberName(QString);
+
+    QString getStartTime();
+    void setStartTime(QString);
+
+    QString getStopTime();
+    void setStopTime(QString);
+
+    QString getNotes();
+    void setNotes(QString);
+
+    int getStartTimeSecs();
+    void setStartTimeSecs(int);
+
+    int getStopTimeSecs();
+    void setStopTimeSecs(int);
+
+private:
+
+    QString memberName;
+    QString startTime;
+    QString stopTime;
+    QString notes;
+
+    int startTimeSecs;
+    int stopTimeSecs;
+
+    int elapsedTimeSecs;
+};
+
 #endif // MAINWINDOW_H
