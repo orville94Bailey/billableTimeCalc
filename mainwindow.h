@@ -104,12 +104,18 @@ public:
     int getStopTimeSecs();
     void setStopTimeSecs(int);
 
+    void readLog();
+
+
+
 private:
 
     QString memberName;
     QString startTime;
     QString stopTime;
     QString notes;
+
+    int processLine(QString);
 
     int startTimeSecs;
     int stopTimeSecs;

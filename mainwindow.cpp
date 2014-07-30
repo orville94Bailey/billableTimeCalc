@@ -540,3 +540,8 @@ void LogEntry::setStopTimeSecs(int newTime)
     stopTimeSecs = newTime;
     elapsedTimeSecs = stopTimeSecs - startTimeSecs;
 }
+
+void LogEntry::readLog()
+{
+
+}
